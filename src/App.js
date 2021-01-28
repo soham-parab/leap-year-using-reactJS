@@ -5,19 +5,20 @@ import React, { useState } from "react";
 var color = "red";
 
 export default function App() {
-  function clickHandler() {
+  var [leapYearOrNo, setleapYearOrNo] = useState("");
+
+  function enterBirthYear(event) {
     var inputYear = event.target.value;
-    console.log(inputYear);
 
-    // if ([inputYear % 4] === 0){
-    //   var result = console.log("Leap year")
+    if ([inputYear % 4] == 0) {
+      leapYearOrNo = "You were born in a leap year!";
+    } else {
+      leapYearOrNo = "You were not born in a leap year.";
+    }
+  }
 
-    // }
-    // else {
-    //   var result = console.log("Not leap year")
-
-    // }
-    // return result
+  function clickHandler() {
+    setleapYearOrNo(leapYearOrNo);
   }
 
   return (
@@ -28,7 +29,7 @@ export default function App() {
       </h1>
 
       <p> Enter your birth year here:</p>
-      <input onChange={clickHandler} />
+      <input onChange={enterBirthYear} />
       <button
         onClick={clickHandler}
         style={{
@@ -39,8 +40,9 @@ export default function App() {
           margin: "auto"
         }}
       >
-        Find out.
+        Find out
       </button>
+      <h2>{leapYearOrNo}</h2>
     </div>
   );
 }
